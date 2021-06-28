@@ -16,7 +16,7 @@
   * [React](README.md)
   * [公众号](README.md)
   * [小程序](README.md)
-    * [云开发](README.md)
+  * [云开发](README.md)
   * [Taro](README.md)
   * [Electron](README.md)
   * [canvas](README.md)
