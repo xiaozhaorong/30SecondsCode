@@ -42,6 +42,8 @@
   * [Window](Java/README.md)
 * [工具](README.md)
   * [Git](Java/README.md)
+  * [vsCode](Java/README.md)
+  * [IDEA](Java/README.md)
   * [GitBook](Java/README.md)
   * [Jenkins](Java/README.md)
   * [树莓派](Java/README.md)
