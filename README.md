@@ -15,4 +15,5 @@
 > http://localhost:4000
 - 编译书籍
 > gitbook build . docs
-
+- 安装gitBook 插件
+> gitbook install 
