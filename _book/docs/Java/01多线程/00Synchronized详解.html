@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>01两种方式实现多线程 · GitBook</title>
+        <title>00Synchronized · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -77,10 +77,10 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="02start与run.html" />
+    <link rel="next" href="01两种方式实现多线程.html" />
     
     
-    <link rel="prev" href="00Synchronized详解.html" />
+    <link rel="prev" href="./" />
     
 
     </head>
@@ -694,9 +694,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.4.2.1" data-path="../00JMM与JVM.html">
+        <li class="chapter " data-level="1.4.2.1" data-path="../01JMM与JVM.md">
             
-                <a href="../00JMM与JVM.html">
+                <span>
             
                     
                     00JMM与JVM
@@ -721,7 +721,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.4.2.2.1" data-path="00Synchronized详解.html">
+        <li class="chapter active" data-level="1.4.2.2.1" data-path="00Synchronized详解.html">
             
                 <a href="00Synchronized详解.html">
             
@@ -734,7 +734,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.4.2.2.2" data-path="01两种方式实现多线程.html">
+        <li class="chapter " data-level="1.4.2.2.2" data-path="01两种方式实现多线程.html">
             
                 <a href="01两种方式实现多线程.html">
             
@@ -1135,7 +1135,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../.." >01两种方式实现多线程</a>
+        <a href="../.." >00Synchronized</a>
     </h1>
 </div>
 
@@ -1150,161 +1150,151 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h2 id="&#x4E24;&#x79CD;&#x65B9;&#x5F0F;&#x5B9E;&#x73B0;&#x591A;&#x7EBF;&#x7A0B;&#xFF08;oracle&#x6587;&#x6863;&#xFF09;">&#x4E24;&#x79CD;&#x65B9;&#x5F0F;&#x5B9E;&#x73B0;&#x591A;&#x7EBF;&#x7A0B;&#xFF08;Oracle&#x6587;&#x6863;&#xFF09;</h2>
-<h4 id="1-&#x5B9E;&#x73B0;runnable&#x63A5;&#x53E3;">1 &#x5B9E;&#x73B0;Runnable&#x63A5;&#x53E3;</h4>
-<pre><code>/**
- * @author :xzr
- * @date :2019-10-11
- * @description :Runnable &#x65B9;&#x5F0F;&#x5B9E;&#x73B0;&#x7EBF;&#x7A0B;
- */
-public class RunnableStyle implements Runnable{
-
-    @Override
-    public void run() {
-        System.out.println(&quot;&#x5B9E;&#x73B0;Runnble&#x63A5;&#x53E3; &#x5B9E;&#x73B0;&#x591A;&#x7EBF;&#x7A0B;&quot;);
-    }
-
-    public static void main(String[] args) {
-        Thread thread = new Thread(new RunnableStyle());
-        thread.run();
-    }
-}
-</code></pre><h4 id="2-&#x7EE7;&#x627F;thread&#x7C7B;">2 &#x7EE7;&#x627F;Thread&#x7C7B;</h4>
-<pre><code>/**
- * @author :xzr
- * @date :2019-10-==11==
- * @description :&#x7EE7;&#x627F;Thread&#x7C7B;&#x5B9E;&#x73B0;&#x591A;&#x7EBF;&#x7A0B;
- */
-public class ThreadStyle extends Thread {
-    @Override
-    public void run() {
-        System.out.println(&quot;&#x7EE7;&#x627F;Thread&#x7C7B;&#x5B9E;&#x73B0;&#x591A;&#x7EBF;&#x7A0B;&quot;);
-    }
-
-    public static void main(String[] args) {
-        new ThreadStyle().start();
-    }
-}
-</code></pre><ul>
-<li><p>&#x4F18;&#x5148;&#x8003;&#x8651;&#x5B9E;&#x73B0;Runnable&#x63A5;&#x53E3;&#x6765;&#x5B9E;&#x73B0;&#x591A;&#x7EBF;&#x7A0B;</p>
-<ol>
-<li>&#x4EE3;&#x7801;&#x67B6;&#x6784;&#x89D2;&#x5EA6; &#x5177;&#x4F53;&#x7684;run&#x65B9;&#x6CD5;&#x5E94;&#x8BE5;&#x548C;&#x521B;&#x5EFA;&#x8FD0;&#x884C;&#x7EBF;&#x7A0B;&#x7684;&#x673A;&#x5236;&#xFF08;Thread&#x7C7B;&#xFF09;&#x89E3;&#x8026;&#xFF0C;&#x7528;runnable&#x53EF;&#x4EE5;&#x5B9E;&#x73B0;&#x89E3;&#x8026;  </li>
-<li>&#x7EE7;&#x627F;Thread&#xFF0C;&#x6BCF;&#x6B21;&#x65B0;&#x5EFA;&#x4EFB;&#x52A1;&#x53EA;&#x80FD;&#x65B0;&#x5EFA;&#x4E00;&#x4E2A;&#x72EC;&#x7ACB;&#x7EBF;&#x7A0B;&#xFF0C;&#x635F;&#x8017;&#x6BD4;&#x8F83;&#x5927;&#xFF0C;&#x7528;Runnable&#x548C;&#x7EBF;&#x7A0B;&#x6C60;&#x53EF;&#x4EE5;&#x51CF;&#x5C0F;&#x635F;&#x8017;</li>
-<li>Java&#x4E0D;&#x652F;&#x6301;&#x53CC;&#x7EE7;&#x627F;&#xFF0C;&#x7EE7;&#x627F;&#x4E86;Runnable&#x5219;&#x4E0D;&#x80FD;&#x7EE7;&#x627F;&#x5176;&#x4ED6;&#x7C7B;&#xFF0C;&#x9650;&#x5236;&#x4E86;&#x53EF;&#x62D3;&#x5C55;&#x6027;</li>
+                                <h2 id="synchronized&#x8BE6;&#x89E3;">Synchronized&#x8BE6;&#x89E3;</h2>
+<h5 id="synchronized-&#x7684;&#x4F5C;&#x7528;">Synchronized &#x7684;&#x4F5C;&#x7528;</h5>
+<ul>
+<li>&#x5B98;&#x7F51;&#x89E3;&#x91CA;<blockquote>
+<p>&#x540C;&#x6B65;&#x65B9;&#x6CD5;&#x652F;&#x6301;&#x4E00;&#x79CD;&#x7B80;&#x5355;&#x7684;&#x7B56;&#x7565;&#x6765;&#x9632;&#x6B62;&#x7EBF;&#x7A0B;&#x5E72;&#x6270;&#x548C;&#x5185;&#x5B58;&#x4E00;&#x81F4;&#x6027;&#x9519;&#x8BEF;&#xFF1A;&#x5982;&#x679C;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#x5BF9;&#x591A;&#x4E2A;&#x7EBF;&#x7A0B;&#x53EF;&#x89C1;&#xFF0C;&#x5219;&#x5BF9;&#x8BE5;&#x5BF9;&#x8C61;&#x53D8;&#x91CF;&#x7684;&#x6240;&#x6709;&#x8BFB;&#x53D6;&#x6216;&#x5199;&#x5165;&#x90FD;&#x662F;&#x901A;&#x8FC7;&#x540C;&#x6B65;&#x65B9;&#x6CD5;&#x5B8C;&#x6210;&#x7684;</p>
+</blockquote>
+</li>
+<li>&#x679C;&#x7136; &#x770B;&#x5B8C;&#x611F;&#x89C9;&#x8DDF;&#x6CA1;&#x770B;&#x4E00;&#x6837;<blockquote>
+<p>&#x81EA;&#x5DF1;&#x7406;&#x89E3; &#x7528;Synchronized&#x4FEE;&#x9970;&#x7684;&#x4EE3;&#x7801; &#x53EF;&#x505A;&#x5230; &#x4FDD;&#x8BC1;&#x5728;&#x540C;&#x4E00;&#x65F6;&#x523B;&#x53EA;&#x6709;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x6267;&#x884C;&#x8FD9;&#x6BB5;&#x4EE3;&#x7801;&#xFF08;&#x4EE3;&#x7801;&#x6BB5;&#x53D8;&#x6210;&#x539F;&#x5B50;&#x6027;&#x7684;&#xFF0C;&#x4FDD;&#x8BC1;&#x5E76;&#x53D1;&#x5B89;&#x5168;&#xFF09;</p>
+<h5 id="synchronized&#x7684;&#x4E24;&#x4E2A;&#x7528;&#x6CD5;">Synchronized&#x7684;&#x4E24;&#x4E2A;&#x7528;&#x6CD5;</h5>
+</blockquote>
+</li>
+<li>&#x5BF9;&#x8C61;&#x9501;<ol>
+<li>&#x540C;&#x6B65;&#x4EE3;&#x7801;&#x5757;&#x9501;(&#x81EA;&#x5DF1;&#x6307;&#x5B9A;&#x9501;&#x5BF9;&#x8C61;)</li>
+<li>&#x65B9;&#x6CD5;&#x9501;(&#x9ED8;&#x8BA4;&#x9501;&#x5BF9;&#x8C61;&#x4E3A;this&#x5F53;&#x524D;&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;)</li>
 </ol>
 </li>
-<li><p>&#x4E24;&#x79CD;&#x65B9;&#x5F0F;&#x90FD;&#x91CD;&#x5199;&#x4E86;run&#x65B9;&#x6CD5; &#x4ED6;&#x4EEC;&#x6709;&#x4EC0;&#x4E48;&#x4E0D;&#x4E00;&#x6837;</p>
-<ol>
-<li>Runnable&#x6700;&#x7EC8;&#x8C03;&#x7528;&#x7684;&#x662F;target.run()</li>
-<li><p>&#x7EE7;&#x627F;Thred &#x5B50;&#x7C7B;&#x7EE7;&#x627F;&#x7236;&#x7C7B; &#x6574;&#x4E2A;run()&#x65B9;&#x6CD5;&#x88AB;&#x91CD;&#x5199;
-<br><b>&#x4EE5;&#x4E0B;&#x662F;Thread &#x65B9;&#x6CD5;&#x7684;run&#x65B9;&#x6CD5;</b>    </p>
-<pre><code>/**
-* private Runnable target; 
-* target &#x662F;&#x4E00;&#x4E2A;Runner&#x63A5;&#x53E3;
-*/
-@Override
-public void run() {
-  if (target != null) {
-      target.run();
-  }
-}
-</code></pre><h4 id="3-&#x5176;&#x4ED6;&#x521B;&#x5EFA;&#x7EBF;&#x7A0B;&#x7684;&#x65B9;&#x5F0F;-&#x672C;&#x8D28;&#x4E0A;&#x5B9E;&#x73B0;&#x591A;&#x7EBF;&#x7A0B;&#x53EA;&#x6709;&#x4EE5;&#x4E0A;&#x4E24;&#x79CD;-&#x5176;&#x4ED6;&#x7684;&#x53EA;&#x662F;&#x5C06;&#x5176;&#x518D;&#x6B21;&#x5305;&#x88C5;&#x800C;&#x5DF2;">3 &#x5176;&#x4ED6;&#x521B;&#x5EFA;&#x7EBF;&#x7A0B;&#x7684;&#x65B9;&#x5F0F; &#x672C;&#x8D28;&#x4E0A;&#x5B9E;&#x73B0;&#x591A;&#x7EBF;&#x7A0B;&#x53EA;&#x6709;&#x4EE5;&#x4E0A;&#x4E24;&#x79CD; &#x5176;&#x4ED6;&#x7684;&#x53EA;&#x662F;&#x5C06;&#x5176;&#x518D;&#x6B21;&#x5305;&#x88C5;&#x800C;&#x5DF2;</h4>
-</li>
-</ol>
-</li>
-<li>Lambda &#x8868;&#x8FBE;&#x5F0F;&#x7684;&#x65B9;&#x5F0F;</li>
 </ul>
 <pre><code>/**
- * @author :xzr
- * @date :2019-10-11
- * @description :Lambda &#x8868;&#x8FBE;&#x5F0F;&#x521B;&#x5EFA;&#x7EBF;&#x7A0B;
+ * &#x5BF9;&#x8C61;&#x9501;&#x5B9E;&#x4F8B;1 &#x4EE3;&#x7801;&#x5757;&#x5F62;&#x5F0F;
  */
-public class MyLambda {
-    public static void main(String[] args) {
-        new Thread(() -&gt;
-                System.out.println(Thread.currentThread().getName())
-        ).start();
-    }
-}
-</code></pre><ul>
-<li>&#x7EBF;&#x7A0B;&#x6C60;&#x7684;&#x65B9;&#x5F0F;</li>
-</ul>
-<pre><code>/**
- * @author :xzr
- * @date :2019-10-11
- * @description :&#x7EBF;&#x7A0B;&#x6C60;&#x521B;&#x5EFA;&#x7EBF;&#x7A0B;&#x7684;&#x65B9;&#x6CD5;
- */
-public class MyThreadPool {
-    public static void main(String[] args) {
-       // &#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x6C60;
-        ExecutorService executorService = Executors.newCachedThreadPool();
-
-        // &#x5F80;&#x7EBF;&#x7A0B;&#x6C60;&#x6DFB;&#x52A0;&#x4EFB;&#x52A1;
-        for (int i = 0; i &lt; 100; i++) {
-            executorService.submit(new Task() {
-            });
+public class SynchronizedObjectCodeBlock2 implements Runnable{
+    public void run() {
+        synchronized(this){
+            try {
+            System.out.println(&quot;&#x5BF9;&#x8C61;&#x9501;&#x4EE3;&#x7801;&#x5757;&quot; + Thread.currentThread().getName() );
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println(&quot;&#x5BF9;&#x8C61;&#x9501;&#x4EE3;&#x7801;&#x5757;&quot; + Thread.currentThread().getName() + &quot;&#x8FD0;&#x884C;&#x7ED3;&#x675F;&quot;);
         }
     }
-}
+    public static void main(String[] args) {
+        SynchronizedObjectCodeBlock2 block2 = new SynchronizedObjectCodeBlock2();
+        Thread thread01 = new Thread(block2);
+        Thread thread02 = new Thread(block2);
 
-class Task implements Runnable {
-    @Override
-    public void run() {
+        thread01.start();
+        thread02.start();
+    }
+}
+</code></pre><pre><code>/**
+ *&#x5BF9;&#x8C61;&#x9501;&#x5B9E;&#x4F8B; &#x65B9;&#x6CD5;&#x9501;
+ */
+public class SynchronizedObjectMethod implements Runnable {
+    public  synchronized void mymethod(){
+        System.out.println(&quot;&#x5BF9;&#x50CF;&#x9501; &#x9501;&#x65B9;&#x6CD5;&quot; +Thread.currentThread().getName());
         try {
-            Thread.sleep(100);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println(Thread.currentThread().getName());
+        System.out.println(Thread.currentThread().getName() + &quot;&#x6267;&#x884C;&#x7ED3;&#x675F;&quot;);
+    }
+
+    @Override
+    public void run(){
+        mymethod();
+    }
+    static SynchronizedObjectMethod smethod = new SynchronizedObjectMethod();
+
+    public static void main(String[] args) {
+        Thread thread1 = new Thread(smethod);
+        Thread thread2 = new Thread(smethod);
+        thread1.start();
+        thread2.start();
     }
 }
 </code></pre><ul>
-<li>&#x5B9A;&#x65F6;&#x5668;&#x7684;&#x65B9;&#x5F0F;</li>
+<li>&#x7C7B;&#x9501;<ol>
+<li>&#x6307;synchronized&#x4FEE;&#x9970;&#x9759;&#x6001;&#x7684;&#x65B9;&#x6CD5;&#x6216;&#x6307;&#x5B9A;&#x9501;&#x4E3A;Class&#x5BF9;&#x8C61;<ul>
+<li>&#x6982;&#x5FF5;(Java&#x7C7B;&#x53EF;&#x80FD;&#x4F1A;&#x6709;&#x5F88;&#x591A;&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;,&#x4F46;&#x53EA;&#x4F1A;&#x6709;&#x4E00;&#x4E2A;Class&#x5BF9;&#x8C61;
+&#x6240;&#x8C13;&#x7C7B;&#x9501;&#x672C;&#x8D28;&#x4E0A;&#x5C31;&#x662F;Class&#x5BF9;&#x8C61;&#x7684;&#x9501;&#x800C;&#x5DF2;,&#x7C7B;&#x9501;&#x53EA;&#x80FD;&#x5728;&#x540C;&#x4E00;&#x65F6;&#x523B;&#x88AB;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#x62E5;&#x6709;)</li>
+<li>&#x5F62;&#x5F0F;1: synchronized&#x52A0;&#x5728;static&#x65B9;&#x6CD5;&#x4E0A;</li>
+</ul>
+</li>
+</ol>
+</li>
 </ul>
 <pre><code>/**
- * @author :xzr
- * @date :2019-10-11
- * @description :&#x5B9A;&#x65F6;&#x5668;&#x521B;&#x5EFA;&#x591A;&#x7EBF;&#x7A0B;
+ * &#x7C7B;&#x9501; static&#x5F62;&#x5F0F;
  */
-public class MyTimmerTask {
+public class SynchronizedClassStatic implements Runnable {
+    @Override
+    public void run(){
+        method();
+    }
+
+    static SynchronizedClassStatic synchronizedClassStatic1 = new SynchronizedClassStatic();
+    static SynchronizedClassStatic synchronizedClassStatic2 = new SynchronizedClassStatic();
+
+    public static synchronized void method(){
+        System.out.println(&quot;&#x7C7B;&#x9501;&#x5F62;&#x5F0F;1: static&#x5F62;&#x5F0F;&quot; + Thread.currentThread().getName());
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println(Thread.currentThread().getName() + &quot;&#x8FD0;&#x884C;&#x7ED3;&#x675F;!&quot;);
+    }
+
     public static void main(String[] args) {
-        Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                System.out.println(Thread.currentThread().getName());
-            }
-        }, 1000, 1000);
+        Thread thread1 = new Thread(synchronizedClassStatic1);
+        Thread thread2 = new Thread(synchronizedClassStatic2);
+        thread1.start();
+        thread2.start();
     }
 }
 </code></pre><ul>
-<li>&#x533F;&#x540D;&#x5185;&#x90E8;&#x7C7B;&#x7684;&#x65B9;&#x5F0F;</li>
+<li>&#x5F62;&#x5F0F;2: synchronized&#x52A0;&#x5728;(*.class)&#x4EE3;&#x7801;&#x5757;&#x4E0A;</li>
 </ul>
 <pre><code>/**
- * @author :xzr
- * @date :2019-10-11
- * @description :&#x533F;&#x540D;&#x5185;&#x90E8;&#x7C7B;&#x5B9E;&#x73B0;&#x591A;&#x7EBF;&#x7A0B;
+ * .class
  */
-public class MyAnonymity {
+public class SynchronizedClassClass implements Runnable{
+    @Override
+    public void run() {
+        method();
+    }
+
+    private void method(){
+        synchronized (SynchronizedClassClass.class){
+            System.out.println(&quot;synchronized(*.class)&quot; + Thread.currentThread().getName());
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println(Thread.currentThread().getName() + &quot;&#x6267;&#x884C;&#x7ED3;&#x675F;!&quot;);
+        }
+    }
+
+    static SynchronizedClassClass synchronizedClassClass1 = new SynchronizedClassClass();
+    static SynchronizedClassClass synchronizedClassClass2 = new SynchronizedClassClass();
+
     public static void main(String[] args) {
-        new Thread() {
-            @Override
-            public void run() {
-                System.out.println(Thread.currentThread().getName());
-            }
-        }.start();
-
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                System.out.println(Thread.currentThread().getName());
-            }
-        }).start();
+        Thread thread1 = new Thread(synchronizedClassClass1);
+        Thread thread2 = new Thread(synchronizedClassClass2);
+        thread1.start();
+        thread2.start();
     }
 }
 </code></pre><footer class="page-footer"><span class="copyright">xiaozhaorong all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x7AE0;&#x4FEE;&#x8BA2;&#x65F6;&#x95F4;&#xFF1A;
-2021-06-28 20:23:23
+2021-06-28 20:18:32
 </span></footer> <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/app.klipse.tech/css/codemirror.css"> <script>     window.klipse_settings = {         selector: ".language-klipse, .lang-eval-clojure",         selector_eval_js: ".lang-eval-js",         selector_eval_python_client: ".lang-eval-python",         selector_eval_php: ".lang-eval-php",         selector_eval_scheme: ".lang-eval-scheme",         selector_eval_ruby: ".lang-eval-ruby",         selector_reagent: ".lang-reagent",        selector_google_charts: ".lang-google-chart",        selector_es2017: ".lang-eval-es2017",        selector_jsx: ".lang-eval-jsx",        selector_transpile_jsx: ".lang-transpile-jsx",        selector_render_jsx: ".lang-render-jsx",        selector_react: ".lang-react",        selector_eval_markdown: ".lang-render-markdown",        selector_eval_lambdaway: ".lang-render-lambdaway",        selector_eval_cpp: ".lang-eval-cpp",        selector_eval_html: ".lang-render-html",        selector_sql: ".lang-eval-sql",        selector_brainfuck: "lang-eval-brainfuck",        selector_js: ".lang-transpile-cljs"    }; </script> <script src="https://storage.googleapis.com/app.klipse.tech/plugin/js/klipse_plugin.js"></script>
                                 
                                 </section>
@@ -1332,12 +1322,12 @@ public class MyAnonymity {
 
             
                 
-                <a href="00Synchronized详解.html" class="navigation navigation-prev " aria-label="Previous page: 00Synchronized">
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: 01多线程">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="02start与run.html" class="navigation navigation-next " aria-label="Next page: 02start()与run()">
+                <a href="01两种方式实现多线程.html" class="navigation navigation-next " aria-label="Next page: 01两种方式实现多线程">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -1348,7 +1338,7 @@ public class MyAnonymity {
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"01两种方式实现多线程","level":"1.4.2.2.2","depth":4,"next":{"title":"02start()与run()","level":"1.4.2.2.3","depth":4,"path":"Java/01多线程/02start与run.md","ref":"Java/01多线程/02start与run.md","articles":[]},"previous":{"title":"00Synchronized","level":"1.4.2.2.1","depth":4,"path":"Java/01多线程/00Synchronized详解.md","ref":"Java/01多线程/00Synchronized详解.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["back-to-top-button","code","splitter","chapter-fold","hide-element","-lunr","-search","search-pro","-sharing","sharing-plus","tbfed-pagefooter","github","edit-link","klipse","livereload"],"pluginsConfig":{"tbfed-pagefooter":{"copyright":"xiaozhaorong","modify_label":"该文章修订时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"chapter-fold":{},"github":{"url":"https://github.com/xiaozhaorong"},"livereload":{},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"klipse":{"myConfigKey":"it's the default value"},"sharing":{"qq":false,"all":[],"douban":false,"facebook":false,"weibo":false,"twitter":false,"pocket":false,"google":false,"qzone":false},"edit-link":{"label":"编辑此页面","base":"//github.com/xiaozhaorong/30SecondsCode/edit/main"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"Java/01多线程/01两种方式实现多线程.md","mtime":"2021-06-28T12:23:23.812Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-28T12:39:48.393Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"00Synchronized","level":"1.4.2.2.1","depth":4,"next":{"title":"01两种方式实现多线程","level":"1.4.2.2.2","depth":4,"path":"Java/01多线程/01两种方式实现多线程.md","ref":"Java/01多线程/01两种方式实现多线程.md","articles":[]},"previous":{"title":"01多线程","level":"1.4.2.2","depth":3,"path":"Java/01多线程/README.md","ref":"Java/01多线程/README.md","articles":[{"title":"00Synchronized","level":"1.4.2.2.1","depth":4,"path":"Java/01多线程/00Synchronized详解.md","ref":"Java/01多线程/00Synchronized详解.md","articles":[]},{"title":"01两种方式实现多线程","level":"1.4.2.2.2","depth":4,"path":"Java/01多线程/01两种方式实现多线程.md","ref":"Java/01多线程/01两种方式实现多线程.md","articles":[]},{"title":"02start()与run()","level":"1.4.2.2.3","depth":4,"path":"Java/01多线程/02start与run.md","ref":"Java/01多线程/02start与run.md","articles":[]},{"title":"03停止线程","level":"1.4.2.2.4","depth":4,"path":"Java/01多线程/03停止线程.md","ref":"Java/01多线程/03停止线程.md","articles":[]},{"title":"04线程的生命周期","level":"1.4.2.2.5","depth":4,"path":"Java/01多线程/04线程的生命周期.md","ref":"Java/01多线程/04线程的生命周期.md","articles":[]},{"title":"05Thread和Object中重要方法详解","level":"1.4.2.2.6","depth":4,"path":"Java/01多线程/05Thread和Object中重要方法详解.md","ref":"Java/01多线程/05Thread和Object中重要方法详解.md","articles":[]},{"title":"06线程池","level":"1.4.2.2.7","depth":4,"path":"Java/01多线程/06线程池.md","ref":"Java/01多线程/06线程池.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["back-to-top-button","code","splitter","chapter-fold","hide-element","-lunr","-search","search-pro","-sharing","sharing-plus","tbfed-pagefooter","github","edit-link","klipse"],"pluginsConfig":{"tbfed-pagefooter":{"copyright":"xiaozhaorong","modify_label":"该文章修订时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"chapter-fold":{},"github":{"url":"https://github.com/xiaozhaorong"},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"code":{"copyButtons":true},"hide-element":{"elements":[".gitbook-link"]},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"klipse":{"myConfigKey":"it's the default value"},"sharing":{"qq":false,"all":[],"douban":false,"facebook":false,"weibo":false,"twitter":false,"pocket":false,"google":false,"qzone":false},"edit-link":{"label":"编辑此页面","base":"//github.com/xiaozhaorong/30SecondsCode/edit/main"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"Java/01多线程/00Synchronized详解.md","mtime":"2021-06-28T12:18:32.033Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-28T12:36:28.485Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
@@ -1395,10 +1385,6 @@ public class MyAnonymity {
     
         
         <script src="../../gitbook/gitbook-plugin-edit-link/plugin.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-livereload/plugin.js"></script>
         
     
         

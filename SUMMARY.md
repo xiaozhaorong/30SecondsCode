@@ -42,7 +42,7 @@
 * [后端](README.md)
   * [Node](README.md)
   * [Java](Java/README.md)
-    * [00JMM与JVM](Java/01JMM与JVM.md)
+    * [00JMM与JVM](Java/00JMM与JVM.md)
     * [01多线程](Java/01多线程/README.md)
       * [00Synchronized](Java/01多线程/00Synchronized详解.md)    
       * [01两种方式实现多线程](Java/01多线程/01两种方式实现多线程.md)    
