@@ -10,7 +10,10 @@
         "search-pro",
         "-sharing",
         "sharing-plus",
-        "tbfed-pagefooter"
+        "tbfed-pagefooter",
+        "github",
+        "edit-link",
+        "klipse"
     ],
     "pluginsConfig": {
         "hide-element": {
@@ -33,6 +36,12 @@
             "copyright": "xiaozhaorong",
             "modify_label": "该文章修订时间：",
             "modify_format": "YYYY-MM-DD HH:mm:ss"
+        },
+        "github": {
+            "url": "https://github.com/xiaozhaorong"
+        },"edit-link": {
+            "base": "//github.com/xiaozhaorong/30SecondsCode/edit/main",
+            "label": "编辑此页面"
         }
     }
 }
