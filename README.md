@@ -1,5 +1,5 @@
 # 30SecondsCode 30秒代码
-整理一下平时记录在有道云用到的东西 方便下次使用
+不定时整理一下平时记录在有道云用到的东西 方便下次使用
 - gitPages 线上浏览
 > https://xiaozhaorong.github.io/30SecondsCode/index.html
 
