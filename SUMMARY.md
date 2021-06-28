@@ -24,7 +24,7 @@
 * [后端](README.md)
   * [Node](README.md)
   * [Java](Java/README.md)
-    * [Java](Java/01 JMM与JVM.md) 
+    * [01JMM与JVM](Java/01JMM与JVM.md) 
   * [Spring](README.md)
   * [SpringMVC](README.md)
   * [MyBatis](README.md)
