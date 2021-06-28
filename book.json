@@ -1,5 +1,5 @@
 {
     "plugins": [
-        "back-to-top-button"
+        "back-to-top-button","code","pageview-count"
     ]
 }
