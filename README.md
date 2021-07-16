@@ -8,7 +8,7 @@
 - 安装gitbook
 > cnpm install gitbook -g
 - 初始化书籍 
-> gitbook init
+> gitbook init 
 - 本地预览书籍
 >  gitbook serve
 - 本地预览 
