@@ -64,7 +64,7 @@
   * [MongoDB](README.md)
   * [SQLServer](README.md)
   * [Redis](README.md)
-* [工具](README.md)
+* [工具](tool/README.md)
   * [Git](README.md)
   * [vsCode](README.md)
   * [IDEA](README.md)
