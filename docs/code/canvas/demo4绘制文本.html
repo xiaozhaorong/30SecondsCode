@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 三要素 id 宽度 高度 -->
+    <canvas id="canvas1" width="600" height="600">
+        // 这里的内容只有在浏览器不支持canvas的时候才会显示
+    </canvas>
+</body>
+<script>
+    // canvas只是一个画布标签 要绘制内容 必须用JS 绘制
+
+    // 1 获取画布标签
+    const canvas1 = document.querySelector('#canvas1')
+    // 2 获取上下文对象(画笔) 2d 获取2d webgl 获取3d
+    const ctx = canvas1.getContext('2d')
+
+    // 3 设置文字格式
+    ctx.font = "80px 微软雅黑"
+    // 设置阴影
+    ctx.shadowBlur = 20;
+    ctx.shadowColor = "rgba(0,0,0,1)";
+    ctx.shadowOffsetX = 10;
+    ctx.shadowOffsetY = 10;
+
+    // 4-1 设置描边的文字
+    // ctx.strokeText("HelloWorld", 100, 200)
+    // 4-2 设置填充格式的文字
+    // ctx.fillText("HelloWorld", 100, 100)
+
+    // 实现B站弹幕
+    let x = 600;
+    setInterval(() => {
+        // 每次进来先清空画布
+        ctx.clearRect(0, 0, 600, 600)
+        x -= 10;
+        if (x < 0) {
+            x = 600
+        }
+        ctx.fillText("烧烤烧烤烧烤", x, 100)
+        ctx.strokeText("椰子鸡椰子鸡", x, 200)
+    }, 60)
+
+
+</script>
+
+</html>

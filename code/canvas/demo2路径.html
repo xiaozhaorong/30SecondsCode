@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 三要素 id 宽度 高度 -->
+    <canvas id="canvas1" width="600" height="600">
+        // 这里的内容只有在浏览器不支持canvas的时候才会显示
+    </canvas>
+</body>
+<script>
+    // canvas只是一个画布标签 要绘制内容 必须用JS 绘制
+
+    // 1 获取画布标签
+    const canvas1 = document.querySelector('#canvas1')
+    // 2 获取上下文对象(画笔) 2d 获取2d webgl 获取3d
+    const ctx = canvas1.getContext('2d')
+
+    // 声明开始路径
+    ctx.beginPath()
+    // 3 设置绘制的起始点
+    ctx.moveTo(50, 50)
+    // 4 设置到达的位置
+    ctx.lineTo(50, 300)
+    ctx.lineTo(300, 300)
+    ctx.lineTo(300, 200)
+    // 声明结束路径 会自动把图像闭合
+    ctx.closePath()
+
+    //  设置线段边缘为圆角
+    ctx.lineCap = "round"
+    // 设置拐角为圆角
+    ctx.lineJoin = "round"
+    // 5 设置绘制路径
+    ctx.strokeStyle = "#29B6F6"
+    ctx.lineWidth = 10
+    ctx.stroke()
+    // 6 填充颜色
+    // ctx.fill()
+
+
+
+</script>
+
+</html>
