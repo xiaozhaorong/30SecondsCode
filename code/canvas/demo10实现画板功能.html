@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .caidan {
+            width: 100vw;
+            height: 100px;
+            line-height: 100px;
+            display: flex;
+        }
+
+        #canvas1 {
+            flex: 1;
+            width: 100vw;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="caidan">
+        <div class="btn">画笔</div>
+        <div class="btn">矩形</div>
+        <div class="btn">圆形</div>
+        <div class="btn">线段粗细</div>
+        <div class="btn">画笔颜色</div>
+    </div>
+
+    <!-- 三要素 id 宽度 高度 -->
+    <canvas id="canvas1" width="600" height="600">
+        这里的内容只有在浏览器不支持canvas的时候才会显示
+    </canvas>
+</body>
+<script>
+    /**
+     * 期望
+     *  1 拖动鼠标 在页面内绘图
+     *      1.1 调整画笔的粗细
+     *      1.2 设置画笔的颜色
+     *  2 拖动鼠标 在任意位置绘制圆形 
+     *      2.1 随意定制大小
+     *  3 拖动鼠标 在任意位置绘制矩形
+     *      3.1 随意定制大小 
+     */
+    // 获取画布标签
+    const canvas1 = document.querySelector('#canvas1')
+    // 获取上下文对象(画笔) 2d 获取2d webgl 获取3d
+    const ctx = canvas1.getContext('2d')
+    // 
+
+
+
+    ctx.stroke()
+</script>
+
+</html>
