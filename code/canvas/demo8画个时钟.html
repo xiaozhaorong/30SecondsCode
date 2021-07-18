@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 三要素 id 宽度 高度 -->
+    <canvas id="canvas1" width="800" height="600">
+        // 这里的内容只有在浏览器不支持canvas的时候才会显示
+    </canvas>
+</body>
+<script>
+    // canvas只是一个画布标签 要绘制内容 必须用JS 绘制
+
+    // 1 获取画布标签
+    const canvas1 = document.querySelector('#canvas1')
+    // 2 获取上下文对象(画笔) 2d 获取2d webgl 获取3d
+    const cxt = canvas1.getContext('2d')
+
+    function renderClock() {
+        // 清除画布
+        cxt.clearRect(0, 0, 800, 600)
+        cxt.save();
+        // 将画布移动到画布的中心
+        cxt.translate(400, 300)
+        // 旋转90度 将x轴转到y轴
+        cxt.rotate(- Math.PI * 2 / 4)
+
+        // 保存画笔 方便旋转完恢复
+        cxt.save();
+        // 画出表盘圈
+        cxt.beginPath()
+        cxt.arc(0, 0, 200, 0, 2 * Math.PI)
+        cxt.strokeStyle = "darkgrey"
+        cxt.lineWidth = 10
+        cxt.stroke()
+        cxt.closePath()
+        cxt.lineCap = "round"
+        // 画出时钟 时刻度
+        for (let i = 0; i < 12; i++) {
+            // 旋转表盘
+            cxt.rotate(Math.PI / 6)
+            cxt.beginPath()
+            cxt.moveTo(180, 0)
+            cxt.lineTo(200, 0)
+            // cxt.strokeStyle = "#F44336"
+            cxt.stroke()
+            cxt.closePath()
+        }
+
+        // 画时钟分钟刻度
+        // 先恢复画笔
+        cxt.restore()
+        cxt.save()
+        cxt.strokeStyle = "darkgrey"
+        cxt.lineWidth = 1
+        for (let i = 0; i < 60; i++) {
+            // 旋转表盘
+            cxt.rotate(Math.PI / 30)
+            cxt.beginPath()
+            cxt.moveTo(185, 0)
+            cxt.lineTo(200, 0)
+            cxt.stroke()
+            cxt.closePath()
+        }
+
+        // 获取时间对象
+        let time = new Date()
+        // 获取时分秒
+        let hour = time.getHours()
+        let min = time.getMinutes()
+        let sec = time.getSeconds()
+        // 如果时间大于12 直接俄减去12
+        hour = hour > 12 ? hour - 12 : hour
+        let DateStr = `${hour}:${min}:${sec}`
+
+        cxt.restore()
+        cxt.save()
+
+        // 绘制秒针
+        cxt.beginPath()
+        cxt.strokeStyle = "#B0BEC5"
+        // 根据秒针的时间进行旋转 360度/60
+        cxt.rotate(Math.PI * 2 / 60 * sec)
+        cxt.moveTo(0, 0)
+        cxt.lineTo(170, 0)
+        cxt.stroke()
+        cxt.closePath()
+
+        cxt.restore()
+        cxt.save()
+        // 绘制分针
+        cxt.beginPath()
+        // 根据分针的时间进行旋转 
+        cxt.rotate((Math.PI * 2 / 60) * min + (Math.PI * 2 / 3600) * sec)
+        cxt.moveTo(0, 0)
+        cxt.lineTo(150, 0)
+        cxt.stroke()
+        cxt.closePath()
+
+        cxt.restore()
+        cxt.save()
+        // 绘制时针
+        cxt.beginPath()
+        // 根据秒针的时间进行旋转 360度/60
+        cxt.rotate((Math.PI * 2 / 12) * hour + (Math.PI * 2 / 60 / 12 * min))
+        cxt.moveTo(0, 0)
+        cxt.lineTo(120, 0)
+        cxt.stroke()
+        cxt.closePath()
+
+        // 圆心
+        cxt.beginPath()
+        cxt.arc(0, 0, 5, 0, Math.PI * 2)
+        cxt.fill()
+        cxt.closePath()
+
+        cxt.restore()
+        // 把时间显示出来
+        cxt.beginPath()
+        cxt.rotate(Math.PI * 2 / 4)
+        cxt.font = "20px 微软雅黑"
+        cxt.fillText(DateStr, -20, 100)
+        cxt.closePath()
+
+
+        cxt.restore()
+        cxt.restore()
+    }
+
+    setInterval(() => {
+        renderClock()
+    }, 1000)
+
+</script>
+<style>
+</style>
+
+</html>

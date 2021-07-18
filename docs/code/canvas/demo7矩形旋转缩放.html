@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 三要素 id 宽度 高度 -->
+    <canvas id="canvas1" width="600" height="600">
+        // 这里的内容只有在浏览器不支持canvas的时候才会显示
+    </canvas>
+</body>
+<script>
+    // canvas只是一个画布标签 要绘制内容 必须用JS 绘制
+
+    // 1 获取画布标签
+    const canvas1 = document.querySelector('#canvas1')
+    // 2 获取上下文对象(画笔) 2d 获取2d webgl 获取3d
+    const ctx = canvas1.getContext('2d')
+    // 3 会将整个坐标移动 x y
+    ctx.translate(200, 200)
+    // 生成并填充一个矩形
+    ctx.fillRect(200, 200, 100, 100)
+    // 先保存第一次化完矩形后的画笔
+    ctx.save()
+
+    // 缩放 放大两倍
+    ctx.scale(2, 2)
+    ctx.fillStyle = "#2962FF"
+    ctx.fillRect(0, 0, 100, 100)
+    
+    // 原矩形
+    // 恢复上次画笔的状态
+    ctx.restore()
+    ctx.fillStyle = "#29B6F6"
+    ctx.fillRect(0, 0, 100, 100)
+    
+    // 旋转
+    ctx.rotate(Math.PI / 4)
+    ctx.fillStyle = "#42A5F5"
+    ctx.fillRect(0, 0, 100, 100)
+
+
+</script>
+
+</html>

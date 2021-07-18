@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        #ggk {
+            width: 400px;
+            height: 100px;
+            position: relative;
+        }
+
+        #ggk .jp {
+            width: 400px;
+            height: 100px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            text-align: center;
+            line-height: 100px;
+            font-size: 20px;
+        }
+
+        #ggk #canvas1 {
+            width: 400px;
+            height: 100px;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="ggk">
+        <div class="jp" id="jp">谢谢惠顾</div>
+        <canvas id="canvas1" width="400" height="100">
+            // 这里的内容只有在浏览器不支持canvas的时候才会显示
+        </canvas>
+    </div>
+</body>
+<script>
+    // canvas只是一个画布标签 要绘制内容 必须用JS 绘制
+
+    // 1 获取画布标签
+    const canvas1 = document.querySelector('#canvas1')
+    // 2 获取上下文对象(画笔) 2d 获取2d webgl 获取3d
+    const ctx = canvas1.getContext('2d')
+
+    // 第一个矩形为目标图像 已经放置在画布上的绘图
+    ctx.fillStyle = "darkgray"
+    ctx.fillRect(0, 0, 400, 100)
+    ctx.font = "20px 微软雅黑"
+    ctx.fillStyle = "#fff"
+    ctx.fillText("刮刮卡", 160, 50)
+    /**
+     * globalCompositeOperation:
+     * 默认源图像会覆盖在目标图像上 source-over
+     * 显示源图像在目标图像上的那一部分 source-ato
+     * 显示源图像在目标图像上的那一部分,目标图像是透明的 source-in
+     * 显示源图像在目标图像外面的那一部分,目标图像是透明的 source-out
+     * 优先显示目标图像 destination-over
+     * 优先显示目标图像在源图像上的那一部分 destination-atop
+     * 优先显示目标图像在源图像上的那一部分 源图像变透明 destination-in
+     * 优先显示目标图像在源图像外面的那一部分 源图像变透明 destination-in
+     * 源图像和目标图像叠加的那一部分变透明 lighter
+     * 显示源图像 忽略目标图像 copy
+     * ctx.globalCompositeOperation = "lighter"
+     */
+
+
+    let isDraw = false
+    // 设置isDraw = true 允许绘制
+    canvas1.onmousedown = () => {
+        isDraw = true
+    }
+    // 设置鼠标抬起时为false
+    canvas1.onmouseup = () => {
+        isDraw = false
+    }
+    // 获取刮刮卡位置
+    const ggkDom = document.querySelector("#ggk")
+
+    // 鼠标移动事件 将源图像内目标内容给清除掉
+    canvas1.onmousemove = (e) => {
+        if (isDraw) {
+            let x = e.pageX - ggkDom.offsetLeft
+            let y = e.pageY - ggkDom.offsetTop
+            ctx.globalCompositeOperation = "destination-out"
+            ctx.arc(x, y, 20, 0, Math.PI * 2)
+            ctx.fill()
+        }
+    }
+    // 第二个矩形为源图像 打算放置在画布上的绘图
+    // ctx.fillStyle = "deepskyblue"
+    // ctx.fillRect(0, 0, 200, 200)
+
+    // 设置随机刮出奖品
+    const jpArr = [
+        { content: '一等奖' },
+        { content: '二等奖' },
+        { content: '三等奖' },
+        { content: '谢谢惠顾' }
+    ]
+    const randomNum = parseInt(Math.random() * jpArr.length)
+    let jpDom = document.querySelector("#jp")
+    jpDom.innerHTML = jpArr[randomNum].content
+
+</script>
+
+</html>
