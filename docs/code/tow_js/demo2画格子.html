@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background: rgba(0, 0, 0, 0.055);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="draw-shapes"></div>
+</body>
+<script src="./two.js"></script>
+<script>
+    // Make an instance of two and place it on the page.
+    const elem = document.getElementById('draw-shapes');
+    const params = {
+        fullscreen: true
+    };
+    const two = new Two(params).appendTo(elem);
+    drawGrid()
+    two.update();
+
+    function drawGrid(plottingScale = 40) {
+        let width = two.width
+        let height = two.height
+        // 画横线
+        for (let i = 0; i < width; i += plottingScale) {
+            two.makeLine(0, i, width, i);
+        }
+        // 画竖线
+        for (let i = 0; i < width; i += plottingScale) {
+            two.makeLine(i, 0, i, height);
+        }
+    }
+</script>
+
+</html>

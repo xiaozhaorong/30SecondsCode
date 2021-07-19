@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            /* background: rgba(0, 0, 0, 0.055); */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="draw-shapes"></div>
+</body>
+<script src="./two.js"></script>
+<script>
+    // Make an instance of two and place it on the page.
+    const elem = document.getElementById('draw-shapes');
+    const params = {
+        fullscreen: true
+    };
+    const two = new Two(params).appendTo(elem);
+    setInterval(() => {
+
+    }, 1000)
+
+
+    // 画格子
+    drawGrid()
+    // 画个车
+    drawCar()
+    // 画车位
+    drawParkingSpot()
+    // 画障碍物
+    drawBarrier()
+    two.update();
+
+    // 画障碍物
+    function drawBarrier() {
+        
+        for (let i = 0; i < 100; i++) {
+            two.makeCircle(500 * Math.random(), 50 * Math.random(), 5);
+
+            two.makeCircle(100 * Math.random(), 500 * Math.random(), 5);
+        }
+    }
+
+    // 画车位
+    function drawParkingSpot() {
+        two.makeRectangle(100, 600, 100, 200);
+        two.makeRectangle(200, 600, 100, 200);
+        two.makeRectangle(300, 600, 100, 200);
+        two.makeRectangle(400, 600, 100, 200);
+        two.makeRectangle(500, 600, 100, 200);
+    }
+
+    // 画车
+    function drawCar() {
+        let car = two.makeRectangle(50, 200, 200, 100);
+        let x = 0
+        setInterval(() => {
+            if (x > two.width) {
+                x = 0
+            }
+            x += 50
+            car._translation.x = x
+            two.update();
+        }, 500)
+    }
+
+    // 画格子
+    function drawGrid(plottingScale = 40) {
+        let width = two.width
+        let height = two.height
+        // 画横线
+        for (let i = 0; i < width; i += plottingScale) {
+            two.makeLine(0, i, width, i);
+        }
+        // 画竖线
+        for (let i = 0; i < width; i += plottingScale) {
+            two.makeLine(i, 0, i, height);
+        }
+    }
+</script>
+
+</html>
